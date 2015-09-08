@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app',
+    'app.cofrades',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,7 +88,7 @@ SESSION_ENGINE = 'mongoengine.django.sessions'
 _MONGODB_USER = ' '
 _MONGODB_PASSWD = ' '
 _MONGODB_HOST = '127.0.0.1'
-_MONGODB_NAME = 'GestionCJN'
+_MONGODB_NAME = 'gestionCJN'
 _MONGODB_DATABASE_HOST = \
     'mongodb://%s:%s@%s/%s' \
     % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
