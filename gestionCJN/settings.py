@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_mongoengine',
     'app.cofrades',
 )
 
@@ -72,6 +74,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'gestionCJN.wsgi.application'
+
+
+REST_FRAMEWORK = {
+    'UNICODE_JSON': False
+}
 
 
 # Database

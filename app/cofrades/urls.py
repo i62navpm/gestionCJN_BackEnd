@@ -1,6 +1,5 @@
-from django.conf.urls import url
-from views import *
-urlpatterns = [
-    url(r'^$', Prueba2.as_view(), name='lista-cofrades'),
-    url(r'^(?P<pk>[a-z0-9]{24})/$', Prueba3.as_view(), name='detalle-cofrade'),
-]
+from rest_framework_mongoengine.routers import MongoDefaultRouter
+from app.cofrades.views import CofradeViewSet
+
+router = MongoDefaultRouter()
+router.register(r'cofrades', CofradeViewSet, base_name='cofrades')
