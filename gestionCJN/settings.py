@@ -77,7 +77,9 @@ WSGI_APPLICATION = 'gestionCJN.wsgi.application'
 
 
 REST_FRAMEWORK = {
-    'UNICODE_JSON': False
+    'UNICODE_JSON': False,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 50
 }
 
 
