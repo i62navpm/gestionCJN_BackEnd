@@ -29,7 +29,8 @@ class CofradeViewSet(ModelViewSet):
     serializer_class = CofradeSerializer
 
     def get_queryset(self):
-        queryset = Cofrade.objects.all()
+        queryset = Cofrade.objects(baja__exists='Bajas' in self.request.path)
+
         nombre = self.request.query_params.get('nombre', None)
         numeroOrden = self.request.query_params.get('numeroOrden', None)
         numeroCofrade = self.request.query_params.get('numeroCofrade', None)
@@ -52,6 +53,11 @@ class CofradeViewSet(ModelViewSet):
                              'datosPersonales.apellido1',
                              'datosPersonales.apellido2',
                              'baja')
+
+    def retrieve(self, request, id=None, **kwargs):
+        queryset = Cofrade.objects(id=id)
+        serializer = CofradeSerializer(queryset[0])
+        return Response(serializer.data)
 
     """
     def list(self, request, **kwargs):
