@@ -2,11 +2,12 @@ from django.core.urlresolvers import reverse
 from mongoengine import *
 import datetime
 
+
 class Direccion(EmbeddedDocument):
     calle = StringField(required=True)
     municipio = StringField(required=True)
     provincia = StringField(required=True)
-    cp = StringField(required=True, regex=r'(\d{5})', max_length=5)
+    cp = IntField(required=True)
     numero = IntField(required=True)
     planta = StringField()
     piso = StringField()
@@ -19,8 +20,8 @@ class DatosPersonales(EmbeddedDocument):
     dni = StringField(regex=r'(\d{8})([A-Z]{1})', max_length=9)
     sexo = StringField(required=True, choices=('Hombre', 'Mujer'))
     direccion = EmbeddedDocumentField(Direccion)
-    fechaNacimiento = DateTimeField(required=True, default=datetime.datetime.now)
-    fechaInscripcion = DateTimeField(required=True, default=datetime.datetime.now)
+    fechaNacimiento = StringField(required=True)
+    fechaInscripcion = StringField(required=True)
     telefono = StringField(regex=r'(\d{9})', max_length=9)
     email = EmailField()
     nota = StringField()
@@ -50,7 +51,7 @@ class DatosLoteria(EmbeddedDocument):
 
 
 class Baja(EmbeddedDocument):
-    fechaBaja = DateTimeField(default=datetime.datetime.now)
+    fechaBaja = StringField(default=datetime.datetime.now)
     motivo = StringField(choices=('Voluntaria',
                                   'Fallecimiento',
                                   'Duplicidad',
