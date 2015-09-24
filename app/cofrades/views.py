@@ -48,10 +48,12 @@ class CofradeViewSet(ModelViewSet):
             queryset = queryset.filter(Q(numeroCofrade=numeroCofrade))
 
         return queryset.only('numeroOrden',
-                             'numeroCofrade',
                              'datosPersonales.nombre',
                              'datosPersonales.apellido1',
                              'datosPersonales.apellido2',
+                             'datosPersonales.direccion.calle',
+                             'datosPersonales.direccion.municipio',
+                             'datosPersonales.direccion.provincia',
                              'baja')
 
     def retrieve(self, request, id=None, **kwargs):
