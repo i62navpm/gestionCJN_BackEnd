@@ -39,13 +39,13 @@ class CofradeViewSet(ModelViewSet):
             for term in nombre.split():
                 queryset = queryset.filter(Q(datosPersonales__nombre__icontains=term) |
                                            Q(datosPersonales__apellido1__icontains=term) |
-                                           Q(datosPersonales__apellido2__icontains=term))
+                                           Q(datosPersonales__apellido2__icontains=term)).order_by('numeroOrden')
 
         elif numeroOrden:
-            queryset = queryset.filter(Q(numeroOrden=numeroOrden))
+            queryset = queryset.filter(Q(numeroOrden=numeroOrden)).order_by('numeroOrden')
 
         elif numeroCofrade:
-            queryset = queryset.filter(Q(numeroCofrade=numeroCofrade))
+            queryset = queryset.filter(Q(numeroCofrade=numeroCofrade)).order_by('numeroOrden')
 
         return queryset.only('numeroOrden',
                              'datosPersonales.nombre',
@@ -54,7 +54,7 @@ class CofradeViewSet(ModelViewSet):
                              'datosPersonales.direccion.calle',
                              'datosPersonales.direccion.municipio',
                              'datosPersonales.direccion.provincia',
-                             'baja')
+                             'baja').order_by('numeroOrden')
 
     def retrieve(self, request, id=None, **kwargs):
         queryset = Cofrade.objects(id=id)
