@@ -1,8 +1,10 @@
+from django.http import HttpResponse
 from rest_framework_mongoengine.viewsets import ModelViewSet
 from rest_framework.response import Response
 from mongoengine.queryset.visitor import Q
 from serializers import CofradeSerializer
 from models import Cofrade
+import json
 
 # from django.http import HttpResponse
 # from django.views.generic import View
@@ -70,3 +72,22 @@ class CofradeViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
     """
+
+
+def calles(request):
+    calles = Cofrade.objects.distinct("datosPersonales.direccion.calle")
+
+    direcciones = []
+    for calle in calles:
+        direccion = {}
+        cofrade = Cofrade.objects(datosPersonales__direccion__calle__iexact=calle)[0]
+        direccion['calle'] = calle
+        direccion['municipio'] = cofrade.datosPersonales.direccion.municipio
+        direccion['cp'] = cofrade.datosPersonales.direccion.cp
+        direccion['provincia'] = cofrade.datosPersonales.direccion.provincia
+        direcciones.append(direccion)
+
+    return HttpResponse(json.dumps(direcciones), content_type="application/json")
+
+
+
