@@ -89,5 +89,11 @@ def calles(request):
 
     return HttpResponse(json.dumps(direcciones), content_type="application/json")
 
+def registros(request):
+    registro = {'numeroOrden': Cofrade.objects.order_by('-numeroOrden')[0]['numeroOrden'] + 1,
+                'numeroCofrade': Cofrade.objects.order_by('-numeroCofrade')[0]['numeroCofrade'] + 1}
+
+    return HttpResponse(json.dumps(registro), content_type="application/json")
+
 
 
