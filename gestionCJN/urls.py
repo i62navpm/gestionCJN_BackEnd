@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from app.cofrades.urls import router as cofrades
+from app.sectores.urls import router as sectores
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(cofrades.urls)),
+    url(r'^api/', include(sectores.urls)),
 ]

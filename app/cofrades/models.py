@@ -1,4 +1,3 @@
-from django.core.urlresolvers import reverse
 from mongoengine import *
 import datetime
 
@@ -17,7 +16,7 @@ class DatosPersonales(EmbeddedDocument):
     nombre = StringField(required=True)
     apellido1 = StringField(required=True)
     apellido2 = StringField(required=True)
-    dni = StringField(regex=r'(\d{8})([A-Z]{1})', max_length=9)
+    dni = StringField(regex=r'(\d{8})([a-zA-Z]{1})', max_length=9)
     sexo = StringField(required=True, choices=('Hombre', 'Mujer'))
     direccion = EmbeddedDocumentField(Direccion)
     fechaNacimiento = StringField(required=True)

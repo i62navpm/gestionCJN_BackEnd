@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from mongoengine.queryset.visitor import Q
 from serializers import CofradeSerializer
 from models import Cofrade
+from paginationClass import StandardResultsSetPagination
 import json
 
 # from django.http import HttpResponse
@@ -29,6 +30,7 @@ import json
 
 class CofradeViewSet(ModelViewSet):
     serializer_class = CofradeSerializer
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         queryset = Cofrade.objects(baja__exists='Bajas' in self.request.path)
