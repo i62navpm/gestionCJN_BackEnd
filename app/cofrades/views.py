@@ -77,8 +77,11 @@ class CofradeViewSet(ModelViewSet):
 
 
 def calles(request):
-    calles = Cofrade.objects.distinct("datosPersonales.direccion.calle")
+    calleParam = request.GET.get('calle', None)
 
+    calles = Cofrade.objects.distinct("datosPersonales.direccion.calle")
+    if calleParam:
+        calles = [aux for aux in calles if calleParam.lower() in aux.lower()]
     direcciones = []
     for calle in calles:
         direccion = {}
