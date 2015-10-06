@@ -54,7 +54,8 @@ class Baja(EmbeddedDocument):
     motivo = StringField(choices=('Voluntaria',
                                   'Fallecimiento',
                                   'Duplicidad',
-                                  'Falta pago de 2 a\\u00f1os'))
+                                  'Falta pago de 2 cuotas anuales',
+                                  'Otro'))
 
 
 class Cofrade(Document):
