@@ -65,6 +65,14 @@ class CofradeViewSet(ModelViewSet):
         serializer = CofradeSerializer(queryset[0])
         return Response(serializer.data)
 
+    def perform_create(self, serializer):
+        serializer.save()
+        if serializer.context['request'].GET.get('updateNumeroCofrade', None):
+            numeroCofrade = 1
+            for cofrade in Cofrade.objects(baja__exists=False).order_by('numeroOrden'):
+                cofrade.numeroCofrade = numeroCofrade
+                numeroCofrade += 1
+                cofrade.save()
     """
     def list(self, request, **kwargs):
         queryset = self.get_queryset()
