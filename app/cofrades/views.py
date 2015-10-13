@@ -37,7 +37,6 @@ class CofradeViewSet(ModelViewSet):
 
         nombre = self.request.query_params.get('nombre', None)
         numeroOrden = self.request.query_params.get('numeroOrden', None)
-        numeroCofrade = self.request.query_params.get('numeroCofrade', None)
 
         if nombre:
             for term in nombre.split():
@@ -47,9 +46,6 @@ class CofradeViewSet(ModelViewSet):
 
         elif numeroOrden:
             queryset = queryset.filter(Q(numeroOrden=numeroOrden)).order_by('numeroOrden')
-
-        elif numeroCofrade:
-            queryset = queryset.filter(Q(numeroCofrade=numeroCofrade)).order_by('numeroOrden')
 
         return queryset.only('numeroOrden',
                              'datosPersonales.nombre',
