@@ -41,6 +41,9 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework_mongoengine',
     'app.cofrades',
+    'app.costaleros',
+    'app.aspirantes',
+    'app.sectores',
 )
 
 MIDDLEWARE_CLASSES = (
