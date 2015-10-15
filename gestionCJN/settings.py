@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'app.cofrades',
     'app.costaleros',
     'app.aspirantes',
+    'app.directivos',
     'app.sectores',
 )
 

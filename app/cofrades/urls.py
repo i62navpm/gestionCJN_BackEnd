@@ -4,7 +4,7 @@ from app.cofrades.views import CofradeViewSet, calles, registros
 
 router = MongoDefaultRouter()
 router.register(r'cofrades', CofradeViewSet, base_name='cofrades')
-router.register(r'cofradesBajas', CofradeViewSet, base_name='cofrades')
+router.register(r'cofradesBajas', CofradeViewSet, base_name='cofradesBajas')
 
 urlpatterns = router.urls
 
