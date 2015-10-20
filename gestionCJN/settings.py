@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'app.aspirantes',
     'app.directivos',
     'app.sectores',
+    'app.papeletasSitios',
 )
 
 MIDDLEWARE_CLASSES = (

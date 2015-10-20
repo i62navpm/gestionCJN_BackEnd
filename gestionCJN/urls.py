@@ -21,6 +21,7 @@ from app.costaleros.urls import router as costaleros
 from app.aspirantes.urls import router as aspirantes
 from app.directivos.urls import router as directivos
 from app.autoridades.urls import router as autoridades
+from app.papeletasSitios.urls import router as papeletasSitios
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -29,5 +30,6 @@ urlpatterns = [
     url(r'^api/', include(costaleros.urls)),
     url(r'^api/', include(aspirantes.urls)),
     url(r'^api/', include(directivos.urls)),
-    url(r'^api/', include(autoridades.urls))
+    url(r'^api/', include(autoridades.urls)),
+    url(r'^api/', include(papeletasSitios.urls))
 ]
