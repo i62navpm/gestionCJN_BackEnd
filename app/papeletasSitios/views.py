@@ -1,3 +1,4 @@
+from bson import ObjectId
 from rest_framework_mongoengine.viewsets import ModelViewSet
 from serializers import PapeletaSitioSerializer
 from models import PapeletaSitio
@@ -29,3 +30,18 @@ class PapeletaSitioViewSet(ModelViewSet):
                     papeletasSitio.papeletas[index].cofrade = aux
 
         return queryset
+
+    def perform_create(self, serializer):
+        queryset = PapeletaSitio.objects(anio=self.request.data['anio'])
+        if not queryset:
+            serializer.save()
+        else:
+            self.request.data['papeletas'][0]['cofrade'] = ObjectId(self.request.data['papeletas'][0]['cofrade'])
+            if not self.request.data.get('remove', None):
+                PapeletaSitio.objects(anio=self.request.data['anio']).update(
+                    push__papeletas=self.request.data['papeletas'][0])
+            else:
+                PapeletaSitio.objects(anio=self.request.data['anio']).update(
+                    pull__papeletas=self.request.data['papeletas'][0])
+                if not len(PapeletaSitio.objects(anio=self.request.data['anio'])[0].papeletas):
+                    PapeletaSitio.objects(anio=self.request.data['anio']).delete()
