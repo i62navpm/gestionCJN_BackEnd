@@ -1,5 +1,5 @@
 from mongoengine import *
-from app.cofrades.models import Cofrade
+
 
 class GastoBancario(Document):
     gastoDomiciliacion = FloatField(min_value=0.0, required=True)
