@@ -24,9 +24,12 @@ from app.autoridades.urls import router as autoridades
 from app.papeletasSitios.urls import router as papeletasSitios
 from app.gastosBancarios.urls import router as gastosBancarios
 from app.numerosLoteria.urls import router as numerosLoteria
+from app.views import vista_login
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^login/$', vista_login, name='login_new'),
+    url('^', include('django.contrib.auth.urls')),
     url(r'^api/', include(cofrades.urls)),
     url(r'^api/', include(sectores.urls)),
     url(r'^api/', include(costaleros.urls)),

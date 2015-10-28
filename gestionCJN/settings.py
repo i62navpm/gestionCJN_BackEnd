@@ -52,7 +52,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'app.views.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -85,6 +85,8 @@ REST_FRAMEWORK = {
     'UNICODE_JSON': False
 }
 
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/index/'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -96,6 +98,7 @@ DATABASES = {
 }
 
 SESSION_ENGINE = 'mongoengine.django.sessions'
+SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
 
 _MONGODB_USER = ' '
 _MONGODB_PASSWD = ' '
@@ -111,7 +114,7 @@ mongoengine.connect(_MONGODB_NAME)
 # Authentication
 
 AUTHENTICATION_BACKENDS = (
-    'mongoengine.django.auth.MongoEngineBackend'
+    'mongoengine.django.auth.MongoEngineBackend',
 )
 
 
