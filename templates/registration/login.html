@@ -1,36 +1,66 @@
-{% block content %}
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1" />
+        <meta charset="UTF-8" />
+        <title>Login</title>
+        <link rel="stylesheet" href="../libs/angular-material/angular-material.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>
+            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+              display: none !important;
+            }
+            body {
+                background-color: #f1f1f1;
+            }
+        </style>
+    </head>
 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+    <body ng-app="login" ng-cloak>
+    <div layout="row" layout-padding layout-align="center center">
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
+    <md-content class="md-whiteframe-z2" flex flex-gt-sm="80" style="background-color:white">
 
-<form method="post" action="{% url 'login_new' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Settings">
+              <md-icon md-font-library="material-icons">input</md-icon>
+            </md-button>
+            <h2>
+              <span>Entrar</span>
+            </h2>
+            <span flex></span>
+          </div>
+        </md-toolbar>
 
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
 
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
-{% endblock %}
+        <form method="post" action="{% url 'login_new' %}">
+            {% csrf_token %}
+            <div layout="column" layout-align="center center">
+                <md-input-container>
+                    <label>Usuario</label>
+                    {{ form.username }}
+                </md-input-container>
+                <md-input-container>
+                    <label>Password</label>
+                    {{ form.password }}
+                </md-input-container>
+                {% if form.errors %}
+                <p style="color: rgb(244,67,54);font-size: 12px;line-height: 14px;">Tu usuario y contraseña no coinciden. Inténtalo de nuevo.</p>
+                {% endif %}
+                <md-button class="md-raised md-primary" type="submit" />Login</md-button>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+        </form>
+    </md-content>
+
+    </div>
+    <script src="../libs/angular/angular.js"></script>
+    <script src="../libs/angular-animate/angular-animate.js"></script>
+    <script src="../libs/angular-aria/angular-aria.js"></script>
+    <script src="../libs/angular-material/angular-material.js"></script>
+    <script>
+        var app = angular.module('login', ['ngMaterial']);
+    </script>
+    </body>
+</html>

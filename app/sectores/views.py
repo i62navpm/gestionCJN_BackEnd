@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from rest_framework_mongoengine.viewsets import ModelViewSet
 from rest_framework.response import Response
 from mongoengine.queryset.visitor import Q
@@ -26,3 +28,6 @@ class SectorViewSet(ModelViewSet):
         serializer = SectorSerializer(queryset[0])
         return Response([serializer.data])
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SectorViewSet, self).dispatch(*args, **kwargs)

@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_mongoengine',
+    'app.login',
     'app.cofrades',
     'app.costaleros',
     'app.aspirantes',
@@ -52,7 +53,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'app.views.AuthenticationMiddleware',
+    'app.login.views.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -85,8 +86,8 @@ REST_FRAMEWORK = {
     'UNICODE_JSON': False
 }
 
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/index/'
+LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/index.html'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -134,5 +135,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static'),
+)
 
 STATIC_URL = '/static/'

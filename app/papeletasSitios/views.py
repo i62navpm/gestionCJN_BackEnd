@@ -1,4 +1,6 @@
 from bson import ObjectId
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from rest_framework_mongoengine.viewsets import ModelViewSet
 from serializers import PapeletaSitioSerializer
 from models import PapeletaSitio
@@ -45,3 +47,7 @@ class PapeletaSitioViewSet(ModelViewSet):
                     pull__papeletas=self.request.data['papeletas'][0])
                 if not len(PapeletaSitio.objects(anio=self.request.data['anio'])[0].papeletas):
                     PapeletaSitio.objects(anio=self.request.data['anio']).delete()
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(PapeletaSitioViewSet, self).dispatch(*args, **kwargs)

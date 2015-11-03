@@ -13,8 +13,9 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
+from django.conf.urls import include, url, patterns
 from django.contrib import admin
+from django.views.generic import TemplateView
 from app.cofrades.urls import router as cofrades
 from app.sectores.urls import router as sectores
 from app.costaleros.urls import router as costaleros
@@ -24,12 +25,13 @@ from app.autoridades.urls import router as autoridades
 from app.papeletasSitios.urls import router as papeletasSitios
 from app.gastosBancarios.urls import router as gastosBancarios
 from app.numerosLoteria.urls import router as numerosLoteria
-from app.views import vista_login
+from app.login.views import vista_login
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', vista_login, name='login_new'),
-    url('^', include('django.contrib.auth.urls')),
+    #url('^', include('django.contrib.auth.urls')),
+    url('^', TemplateView.as_view(template_name='index.html')),
     url(r'^api/', include(cofrades.urls)),
     url(r'^api/', include(sectores.urls)),
     url(r'^api/', include(costaleros.urls)),
@@ -40,3 +42,9 @@ urlpatterns = [
     url(r'^api/', include(gastosBancarios.urls)),
     url(r'^api/', include(numerosLoteria.urls))
 ]
+
+urlpatterns += patterns(
+    'django.contrib.staticfiles.views',
+    url(r'^(?:index.html)?$', 'serve', kwargs={'path': 'index.html'}),
+    url(r'^(?P<path>(?:js|css|img|libs|templates)/.*)$', 'serve'),
+)

@@ -1,4 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.utils.decorators import method_decorator
 from rest_framework_mongoengine.viewsets import ModelViewSet
 from rest_framework.response import Response
 from mongoengine.queryset.visitor import Q
@@ -6,6 +8,7 @@ from serializers import CofradeSerializer
 from models import Cofrade
 from paginationClass import StandardResultsSetPagination
 import json
+
 
 # from django.http import HttpResponse
 # from django.views.generic import View
@@ -69,6 +72,11 @@ class CofradeViewSet(ModelViewSet):
                 cofrade.numeroCofrade = numeroCofrade
                 numeroCofrade += 1
                 cofrade.save()
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CofradeViewSet, self).dispatch(*args, **kwargs)
+
     """
     def list(self, request, **kwargs):
         queryset = self.get_queryset()
@@ -80,6 +88,7 @@ class CofradeViewSet(ModelViewSet):
     """
 
 
+@login_required
 def calles(request):
     calleParam = request.GET.get('calle', None)
 
@@ -98,11 +107,10 @@ def calles(request):
 
     return HttpResponse(json.dumps(direcciones), content_type="application/json")
 
+
+@login_required
 def registros(request):
     registro = {'numeroOrden': Cofrade.objects.order_by('-numeroOrden')[0]['numeroOrden'] + 1,
                 'numeroCofrade': Cofrade.objects.order_by('-numeroCofrade')[0]['numeroCofrade'] + 1}
 
     return HttpResponse(json.dumps(registro), content_type="application/json")
-
-
-
