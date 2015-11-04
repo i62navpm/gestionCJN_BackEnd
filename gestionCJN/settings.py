@@ -87,7 +87,7 @@ REST_FRAMEWORK = {
 }
 
 LOGIN_URL = '/login'
-LOGIN_REDIRECT_URL = '/index.html'
+LOGIN_REDIRECT_URL = '/index_app.html'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases

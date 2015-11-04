@@ -29,9 +29,8 @@ from app.login.views import vista_login
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/$', vista_login, name='login_new'),
-    #url('^', include('django.contrib.auth.urls')),
-    url('^', TemplateView.as_view(template_name='index.html')),
+    url(r'^login/$', vista_login, name='login'),
+    url('^$', TemplateView.as_view(template_name='index.html')),
     url(r'^api/', include(cofrades.urls)),
     url(r'^api/', include(sectores.urls)),
     url(r'^api/', include(costaleros.urls)),
@@ -45,6 +44,6 @@ urlpatterns = [
 
 urlpatterns += patterns(
     'django.contrib.staticfiles.views',
-    url(r'^(?:index.html)?$', 'serve', kwargs={'path': 'index.html'}),
+    url(r'^(?:index_app.html)?$', 'serve', kwargs={'path': 'index_app.html'}),
     url(r'^(?P<path>(?:js|css|img|libs|templates)/.*)$', 'serve'),
 )
