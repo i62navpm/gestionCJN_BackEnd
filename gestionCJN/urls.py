@@ -30,6 +30,7 @@ from app.login.views import vista_login
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', vista_login, name='login'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
     url('^$', TemplateView.as_view(template_name='index.html')),
     url(r'^api/', include(cofrades.urls)),
     url(r'^api/', include(sectores.urls)),
