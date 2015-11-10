@@ -25,6 +25,7 @@ from app.autoridades.urls import router as autoridades
 from app.papeletasSitios.urls import router as papeletasSitios
 from app.gastosBancarios.urls import router as gastosBancarios
 from app.numerosLoteria.urls import router as numerosLoteria
+from app.users.urls import router as users
 from app.login.views import vista_login
 
 urlpatterns = [
@@ -40,7 +41,8 @@ urlpatterns = [
     url(r'^api/', include(autoridades.urls)),
     url(r'^api/', include(papeletasSitios.urls)),
     url(r'^api/', include(gastosBancarios.urls)),
-    url(r'^api/', include(numerosLoteria.urls))
+    url(r'^api/', include(numerosLoteria.urls)),
+    url(r'^api/', include(users.urls))
 ]
 
 urlpatterns += patterns(
